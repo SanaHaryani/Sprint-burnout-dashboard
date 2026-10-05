@@ -1,68 +1,129 @@
 # AI-Based Sprint Planning and Burnout Prediction System
 
-Master's Thesis — IU University of Applied Sciences
-Programme: MSc. Computer Science
+An AI-based decision-support system designed to help Agile teams estimate sprint capacity and identify potential burnout risk using machine learning.
 
-Overview
+## 📌 Project Overview
 
-This repository contains the full implementation for the thesis "Concept for an AI-Based Sprint Planning and Burnout Prediction System for Agile Project Management." The system uses machine learning to predict sprint capacity (regression) and burnout risk (classification) from Agile workload variables, and exposes predictions through an interactive Streamlit dashboard.
+This project presents a concept for an **AI-Based Sprint Planning and Burnout Prediction System for Agile Project Management**.
 
-Repository Contents
-├── app.py                          # Streamlit dashboard application
-├── sprint_capacity_model.pkl       # Trained Linear Regression model
-├── burnout_classifier_model.pkl    # Trained Logistic Regression model
-├── scaler.pkl                      # Fitted StandardScaler (must match models)
-├── feature_columns.pkl             # Feature column order used during training
-├── requirements.txt                # Python dependencies
-└── README.md                       # This file
+The system uses Agile workload and team-related variables to:
 
-Models
-Task	Model	Test Performance	CV Mean
-Sprint Capacity (Regression)	Linear Regression	R² = 0.905	R² = 0.916
-Burnout Risk (Classification)	Logistic Regression	Accuracy = 0.855	Accuracy = 0.845
+* Predict **sprint capacity** using regression
+* Predict **burnout risk** using classification
+* Provide predictions through an interactive **Streamlit dashboard**
+* Support sprint planning and workload-related decision-making
 
-Both models were selected through a systematic comparison of five candidate algorithms per task (Linear Regression, Decision Tree, Random Forest, Gradient Boosting, XGBoost). All four .pkl files must be present in the same directory as app.py for the dashboard to run correctly.
+The project combines **machine learning, Agile project management and data-driven decision support**.
 
-Running the Dashboard
+## 🤖 Machine Learning Models
 
-Requirements: Python 3.11+
+Five machine learning algorithms were evaluated for each prediction task:
 
-Install dependencies:
+* Linear Regression
+* Decision Tree
+* Random Forest
+* Gradient Boosting
+* XGBoost
 
-bash
+The best-performing models were selected for the final system.
+
+| Task            | Model               | Test Performance | Cross-Validation |
+| --------------- | ------------------- | ---------------: | ---------------: |
+| Sprint Capacity | Linear Regression   |       R² = 0.905 |       R² = 0.916 |
+| Burnout Risk    | Logistic Regression | Accuracy = 0.855 | Accuracy = 0.845 |
+
+The trained models and preprocessing objects are stored as `.pkl` files and are required to run the dashboard.
+
+## 📊 Dataset
+
+The system was trained on a **synthetic dataset containing 1,000 Agile sprint observations**.
+
+The data was generated programmatically using a causal-chain approach:
+
+**Team Characteristics → Velocity → Workload → Deadlines → Sprint Capacity / Burnout Risk**
+
+A fixed random seed (**42**) was used to ensure reproducibility.
+
+No real organisational or personal data was used.
+
+## 🖥️ Interactive Dashboard
+
+The trained models are integrated into a **Streamlit dashboard** that allows users to enter Agile sprint variables and receive model predictions.
+
+### Dashboard capabilities
+
+* Sprint capacity prediction
+* Burnout risk prediction
+* Interactive input parameters
+* Model-based decision support
+* Prediction visualisation
+
+## 📁 Repository Contents
+
+```text
+├── app.py
+├── sprint_capacity_model.pkl
+├── burnout_classifier_model.pkl
+├── scaler.pkl
+├── feature_columns.pkl
+├── requirements.txt
+├── thesis_training.ipynb
+└── README.md
+```
+
+| File                           | Description                               |
+| ------------------------------ | ----------------------------------------- |
+| `app.py`                       | Streamlit dashboard application           |
+| `sprint_capacity_model.pkl`    | Trained Linear Regression model           |
+| `burnout_classifier_model.pkl` | Trained Logistic Regression model         |
+| `scaler.pkl`                   | Fitted StandardScaler                     |
+| `feature_columns.pkl`          | Feature order used during training        |
+| `requirements.txt`             | Python dependencies                       |
+| `thesis_training.ipynb`        | Complete training and evaluation pipeline |
+
+## 🛠️ Technologies
+
+* **Python**
+* **Scikit-learn**
+* **XGBoost**
+* **SHAP**
+* **Pandas**
+* **NumPy**
+* **Matplotlib / Seaborn**
+* **Streamlit**
+* **Jupyter Notebook**
+* **Joblib**
+
+## 🚀 Running the Dashboard
+
+### Requirements
+
+Python 3.11+
+
+### Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-Run the app:
+### Run the application
 
-bash
+```bash
 streamlit run app.py
+```
 
-The dashboard will open automatically in your browser at http://localhost:8501.
+The dashboard will be available locally at:
 
-Live Demo
+`http://localhost:8501`
 
-Deployed on Streamlit Community Cloud
+## 🌐 Live Demo
 
-Dataset
+**Streamlit Community Cloud:**
+https://sprint-burnout-dashboard-r6gfcm44bwuxze4vg8c7br.streamlit.app/
 
-The system was trained on a synthetic dataset of 1,000 Agile sprint observations generated using a causal-chain process (team characteristics → velocity → workload → deadlines → sprint capacity / burnout risk). All data was generated programmatically with a fixed random seed (42) for full reproducibility. No real organisational or personal data was used.
+## 🔬 Reproducibility
 
-Reproducibility
+The complete model training and evaluation pipeline is documented in the accompanying Jupyter notebook.
 
-The full training pipeline is documented in the accompanying Jupyter notebook. Running all cells top to bottom with the same random seed (42) will reproduce all results reported in Chapter 4 of the thesis exactly.
+Using the same dataset generation process and random seed (**42**) allows the reported experiments and results to be reproduced.
 
-Dependencies
-Library	Purpose
-streamlit	Dashboard interface
-scikit-learn	Model training, preprocessing, evaluation
-xgboost	Additional ensemble benchmark
-shap	Explainability (SHAP values)
-numpy	Numerical computation
-pandas	Data manipulation
-matplotlib / seaborn	Visualisation
-joblib	Model serialisation
-Citation
-
-License
-
-This project was developed for academic research purposes only. The models and dashboard are proof-of-concept implementations and are not intended for production deployment without further validation on real organisational data.
